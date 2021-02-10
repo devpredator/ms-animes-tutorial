@@ -3,6 +3,7 @@
  */
 package com.devpredator.animes.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -35,6 +36,23 @@ public class AnimesServiceImpl implements AnimesService {
 				.collect(Collectors.toList());
 		
 		return animesDataSource;
+	}
+
+	@Override
+	public Anime guardarAnime(Anime anime) {
+		anime.setFechaCreacion(LocalDateTime.now());
+		
+		return this.animesRepository.save(anime);
+	}
+
+	@Override
+	public Anime actualizarAnime(Anime anime) {
+		return this.animesRepository.save(anime);
+	}
+
+	@Override
+	public void eliminarAnime(Long id) {
+		this.animesRepository.deleteById(id);
 	}
 
 }
